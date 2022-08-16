@@ -50,6 +50,10 @@ public:
 
 } NEOGPS_PACKED;
 
-extern Print & operator << ( Print & outs, const DMS_t & );
+#ifdef ARDUINO_AVR_NANO_EVERY
+	extern arduino::Print & operator << ( arduino::Print & outs, const DMS_t & );
+#else
+  extern Print & operator << ( Print & outs, const DMS_t & );
+#endif
 
 #endif
