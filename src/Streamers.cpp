@@ -19,22 +19,39 @@
 #include "NMEAGPS.h"
 
 //#define USE_FLOAT
+#ifdef ARDUINO_AVR_NANO_EVERY
+  arduino::Print& operator <<( arduino::Print &outs, const bool b )
+    { outs.print( b ? 't' : 'f' ); return outs; }
 
-Print& operator <<( Print &outs, const bool b )
-  { outs.print( b ? 't' : 'f' ); return outs; }
+  arduino::Print& operator <<( arduino::Print &outs, const char c ) { outs.print(c); return outs; }
 
-Print& operator <<( Print &outs, const char c ) { outs.print(c); return outs; }
+  arduino::Print& operator <<( arduino::Print &outs, const uint16_t v ) { outs.print(v); return outs; }
 
-Print& operator <<( Print &outs, const uint16_t v ) { outs.print(v); return outs; }
+  arduino::Print& operator <<( arduino::Print &outs, const uint32_t v ) { outs.print(v); return outs; }
 
-Print& operator <<( Print &outs, const uint32_t v ) { outs.print(v); return outs; }
+  arduino::Print& operator <<( arduino::Print &outs, const int32_t v ) { outs.print(v); return outs; }
 
-Print& operator <<( Print &outs, const int32_t v ) { outs.print(v); return outs; }
+  arduino::Print& operator <<( arduino::Print &outs, const uint8_t v ) { outs.print(v); return outs; }
 
-Print& operator <<( Print &outs, const uint8_t v ) { outs.print(v); return outs; }
+  arduino::Print& operator <<( arduino::Print &outs, const __FlashStringHelper *s )
+  { outs.print(s); return outs; }
+#else
+  Print& operator <<( Print &outs, const bool b )
+    { outs.print( b ? 't' : 'f' ); return outs; }
 
-Print& operator <<( Print &outs, const __FlashStringHelper *s )
-{ outs.print(s); return outs; }
+  Print& operator <<( Print &outs, const char c ) { outs.print(c); return outs; }
+
+  Print& operator <<( Print &outs, const uint16_t v ) { outs.print(v); return outs; }
+
+  Print& operator <<( Print &outs, const uint32_t v ) { outs.print(v); return outs; }
+
+  Print& operator <<( Print &outs, const int32_t v ) { outs.print(v); return outs; }
+
+  Print& operator <<( Print &outs, const uint8_t v ) { outs.print(v); return outs; }
+
+  Print& operator <<( Print &outs, const __FlashStringHelper *s )
+  { outs.print(s); return outs; }
+#endif
 
 //------------------------------------------
 
