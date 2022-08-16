@@ -20,13 +20,23 @@
 
 #include <Arduino.h>
 
-extern Print & operator <<( Print & outs, const bool b );
-extern Print & operator <<( Print & outs, const char c );
-extern Print & operator <<( Print & outs, const uint16_t v );
-extern Print & operator <<( Print & outs, const uint32_t v );
-extern Print & operator <<( Print & outs, const int32_t v );
-extern Print & operator <<( Print & outs, const uint8_t v );
-extern Print & operator <<( Print & outs, const __FlashStringHelper *s );
+#ifdef ARDUINO_AVR_NANO_EVERY
+  extern arduino::Print & operator <<( arduino::Print & outs, const bool b );
+  extern arduino::Print & operator <<( arduino::Print & outs, const char c );
+  extern arduino::Print & operator <<( arduino::Print & outs, const uint16_t v );
+  extern arduino::Print & operator <<( arduino::Print & outs, const uint32_t v );
+  extern arduino::Print & operator <<( arduino::Print & outs, const int32_t v );
+  extern arduino::Print & operator <<( arduino::Print & outs, const uint8_t v );
+  extern arduino::Print & operator <<( arduino::Print & outs, const __FlashStringHelper *s );
+#else
+  extern Print & operator <<( Print & outs, const bool b );
+  extern Print & operator <<( Print & outs, const char c );
+  extern Print & operator <<( Print & outs, const uint16_t v );
+  extern Print & operator <<( Print & outs, const uint32_t v );
+  extern Print & operator <<( Print & outs, const int32_t v );
+  extern Print & operator <<( Print & outs, const uint8_t v );
+  extern Print & operator <<( Print & outs, const __FlashStringHelper *s );
+#endif
 
 class gps_fix;
 
