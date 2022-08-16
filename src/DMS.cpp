@@ -65,8 +65,11 @@ void DMS_t::From( int32_t deg_1E7 )
 } // From
 
 //----------------------------------------------------------------
-
+#ifdef ARDUINO_AVR_NANO_EVERY
+arduino::Print & operator << ( arduino::Print & outs, const DMS_t & dms )
+#else
 Print & operator << ( Print & outs, const DMS_t & dms )
+#endif
 {
   if (dms.degrees < 10)
     outs.write( '0' );
