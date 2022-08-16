@@ -22,7 +22,11 @@
 
 #include <Print.h>
 
-Print & operator<<( Print& outs, const NeoGPS::time_t& t )
+#ifdef ARDUINO_AVR_NANO_EVERY
+	arduino::Print & operator<<( arduino::Print& outs, const NeoGPS::time_t& t )
+#else
+  Print & operator<<( Print& outs, const NeoGPS::time_t& t )
+#endif
 {
   outs.print( t.full_year( t.year ) );
   outs.write( '-' );
