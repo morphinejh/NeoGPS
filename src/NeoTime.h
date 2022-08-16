@@ -291,8 +291,9 @@ protected:
 } NEOGPS_PACKED;
 
 }; // namespace NeoGPS
-
-class Print;
+#ifndef ARDUINO_AVR_NANO_EVERY
+  class Print;
+#endif
 
 /**
  * Print the date/time to the given stream with the format "YYYY-MM-DD HH:MM:SS".
@@ -300,6 +301,10 @@ class Print;
  * @param[in] t time structure.
  * @return iostream.
  */
-Print & operator <<( Print & outs, const NeoGPS::time_t &t );
+#ifdef ARDUINO_AVR_NANO_EVERY
+	arduino::Print & operator <<( arduino::Print & outs, const NeoGPS::time_t &t );
+#else
+  Print & operator <<( Print & outs, const NeoGPS::time_t &t );
+#endif
 
 #endif
